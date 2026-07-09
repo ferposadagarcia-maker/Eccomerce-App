@@ -1,0 +1,1 @@
+aqui van todos los providers para evitar el provider hell y solo llamarlo desde main 
