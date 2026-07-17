@@ -11,7 +11,7 @@ import type { AuthUser } from "../types/auth.types";
 
 const googleProvider = new GoogleAuthProvider();
 
-export const singupService = async (email: string, password: string) => {
+export const signupService = async (email: string, password: string) => {
   const credentials = await createUserWithEmailAndPassword(
     auth,
     email,
@@ -50,7 +50,7 @@ export const singinWithGoogleService = async () => {
   }
 };
 
-export const singoutService = async () => {
+export const signoutService = async () => {
   await signOut(auth);
 };
 
