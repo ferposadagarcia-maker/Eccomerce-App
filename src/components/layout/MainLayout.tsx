@@ -1,13 +1,13 @@
-// src/components/layout/MainLayout.tsx
 import { Outlet, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useCart } from '../../hooks/useCart';
 
 export const MainLayout = () => {
     const { user, logout } = useAuth();
+    const { items } = useCart();
 
     return (
         <div className="app-shell">
-            {/* Barra de Navegación de la Joyería */}
             <header className="main-header">
                 <div className="header-container">
                     <Link to="/" className="brand-logo">
@@ -16,6 +16,9 @@ export const MainLayout = () => {
 
                     <nav className="header-nav">
                         <Link to="/">Catálogo</Link>
+                        <Link to="/cart" style={{ fontWeight: 500 }}>
+                            Carrito ({items.length})
+                        </Link>
 
                         {user ? (
                             <div className="user-menu">
