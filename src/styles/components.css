@@ -1,0 +1,247 @@
+/* src/styles/components.css */
+
+/* 1. Contenedores del Catálogo de Joyas */
+.catalog-container {
+    max-width: 80rem;
+    /* Equivale a max-w-7xl (1280px) */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3rem 1.5rem;
+}
+
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Barra de navegación */
+.main-header {
+    background-color: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.brand-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+}
+
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.logout-btn {
+    color: var(--destructive);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Pie de página */
+.main-footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+@media (min-width: 640px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .catalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .catalog-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+/* 2. Tarjeta de Joyería (Minimalismo y Lujo) */
+.jewelry-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease;
+}
+
+.jewelry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover);
+}
+
+/* Contenedor de la Imagen para Zoom Sutil */
+.jewelry-image-container {
+    width: 100%;
+    height: 18rem;
+    /* Proporción alargada elegante */
+    overflow: hidden;
+    position: relative;
+    background-color: var(--surface);
+}
+
+.jewelry-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.jewelry-card:hover .jewelry-image {
+    transform: scale(1.06);
+    /* Zoom sutil característico de marcas de lujo */
+}
+
+/* Información de la Joya */
+.jewelry-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.jewelry-category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    /* Tracking abierto para estilo sofisticado */
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.jewelry-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.jewelry-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.jewelry-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--surface);
+}
+
+.jewelry-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+/* Botón de Acción de Lujo */
+.btn-luxury {
+    padding: 0.5rem 1.25rem;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-luxury:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 3. Filtros Horizontales Escroleables */
+.filter-scroll-container {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+/* Ocultar barra de scroll para estética limpia */
+.filter-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-scroll-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.filter-tab {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+.filter-tab-active {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.filter-tab-inactive {
+    background-color: var(--card);
+    color: var(--muted);
+    border: 1px solid var(--border);
+}
+
+.filter-tab-inactive:hover {
+    border-color: var(--border-hover);
+    color: var(--foreground);
+}
+
+/* 4. Buscador de Lujo */
+.luxury-search-box {
+    width: 100%;
+    max-width: 28rem;
+    position: relative;
+}
