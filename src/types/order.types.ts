@@ -1,4 +1,4 @@
-import type { CartItem } from "./cartItem.types"
+import type { CartItem } from "./cart.types"
 export type OrderStatus = 'pendiente' | 'procesando' | 'enviado' | 'entregado' | 'cancelado'
 
 export interface Order {

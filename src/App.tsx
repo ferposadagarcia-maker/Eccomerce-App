@@ -8,6 +8,7 @@ import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { CatalogPage } from './pages/CatalogPage';
 import { LoginPage } from './pages/LoginPage';
 import { AdminPage } from './pages/AdminPage';
+import { CartPage } from './pages/CartPage';
 
 export const App = () => {
   return (
@@ -20,6 +21,7 @@ export const App = () => {
           <Route element={<MainLayout />}>
             <Route path="/" element={<CatalogPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/cart" element={<CartPage />} />
 
             {/* Rutas protegidas exclusivas para el rol Administrador */}
             <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
@@ -32,3 +34,5 @@ export const App = () => {
     </BrowserRouter>
   );
 };
+
+export default App;
