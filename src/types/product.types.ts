@@ -1,3 +1,5 @@
+export type Category = "anillos" | "collares" | "pulseras";
+
 export interface Product {
     id: string;
     name: string;
