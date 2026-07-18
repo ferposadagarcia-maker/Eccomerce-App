@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/layout/ProtectedRoute';
 // Importación modular de nuestras páginas
 import { CatalogPage } from './pages/CatalogPage';
 import { LoginPage } from './pages/LoginPage';
+import { SignupPage } from './pages/SignupPage';
 import { AdminPage } from './pages/AdminPage';
 import { CartPage } from './pages/CartPage';
 
@@ -21,6 +22,7 @@ export const App = () => {
           <Route element={<MainLayout />}>
             <Route path="/" element={<CatalogPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/cart" element={<CartPage />} />
 
             {/* Rutas protegidas exclusivas para el rol Administrador */}
