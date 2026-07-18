@@ -1,10 +1,15 @@
 import { Outlet, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
+import { useWishlist } from '../../hooks/useWishlist';
 
 export const MainLayout = () => {
     const { user, logout } = useAuth();
     const { items } = useCart();
+    const { wishlistItems } = useWishlist();
+
+    const totalQuantityCart = items.reduce((total, item) => total + item.quantity, 0);
+    const totalFavorites = wishlistItems.length;
 
     return (
         <div className="app-shell">
@@ -17,7 +22,10 @@ export const MainLayout = () => {
                     <nav className="header-nav">
                         <Link to="/">Catálogo</Link>
                         <Link to="/cart" style={{ fontWeight: 500 }}>
-                            Carrito ({items.length})
+                            🛒 ({totalQuantityCart})
+                        </Link>
+                        <Link to="/wishlist" style={{ fontWeight: 500 }}>
+                            ♡ ({totalFavorites})
                         </Link>
 
                         {user ? (
