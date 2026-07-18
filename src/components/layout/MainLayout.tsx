@@ -27,7 +27,11 @@ export const MainLayout = () => {
                         <Link to="/wishlist" style={{ fontWeight: 500 }}>
                             ♡ ({totalFavorites})
                         </Link>
-
+                        {user && user.role === 'admin' && (
+                            <Link to="/admin" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
+                                Administrar
+                            </Link>
+                        )}
                         {user ? (
                             <div className="user-menu">
                                 <span>{user.email}</span>
@@ -44,12 +48,10 @@ export const MainLayout = () => {
                 </div>
             </header>
 
-            {/* Aquí es donde React Router inyectará las páginas (CatalogPage, LoginPage, etc.) */}
             <div className="main-content">
                 <Outlet />
             </div>
 
-            {/* Pie de página */}
             <footer className="main-footer">
                 <p>© {new Date().getFullYear()} Aurea Joyas. Todos los derechos reservados.</p>
             </footer>

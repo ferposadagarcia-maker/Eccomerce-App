@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginService } from '../services/auth.service';
+import { signupService } from '../services/auth.service';
 import { mapAuthError } from '../services/authError.service';
 
-export const LoginPage = () => {
+export const SignupPage = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -14,16 +15,22 @@ export const LoginPage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
+
+        // Validación básica antes de enviar peticiones a Firebase
+        if (password !== confirmPassword) {
+            setError('Las contraseñas ingresadas no coinciden.');
+            return;
+        }
+
         setIsLoading(true);
 
         try {
-            // Llamamos al servicio de login desarrollado con tu profesor
-            await loginService(email, password);
+            // Registra el usuario en Firebase Auth e inyecta el rol 'customer' en Firestore
+            await signupService(email, password);
 
-            // La navegación ocurre en el try de forma secuencial
+            alert('¡Cuenta creada con éxito!');
             navigate('/', { replace: true });
         } catch (err: any) {
-            // Atajamos el código técnico de Firebase y mostramos el texto traducido
             setError(mapAuthError(err.code));
         } finally {
             setIsLoading(false);
@@ -33,7 +40,7 @@ export const LoginPage = () => {
     return (
         <div className="auth-page-container">
             <article className="auth-box">
-                <h2>Ingresar</h2>
+                <h2>Crear Cuenta</h2>
 
                 {error && <div className="form-error-alert">{error}</div>}
 
@@ -57,9 +64,22 @@ export const LoginPage = () => {
                             id="password"
                             type="password"
                             required
-                            placeholder="••••••"
+                            placeholder="Mínimo 6 caracteres"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            required
+                            placeholder="Repite la contraseña"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             disabled={isLoading}
                         />
                     </div>
@@ -70,14 +90,14 @@ export const LoginPage = () => {
                         style={{ marginTop: '1.5rem', width: '100%' }}
                         disabled={isLoading}
                     >
-                        {isLoading ? 'Verificando...' : 'Iniciar Sesión'}
+                        {isLoading ? 'Registrando...' : 'Registrarse'}
                     </button>
                 </form>
 
                 <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--muted)', textAlign: 'center' }}>
-                    ¿Aún no tienes cuenta?{' '}
-                    <Link to="/signup" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
-                        Regístrate aquí
+                    ¿Ya tienes una cuenta activa?{' '}
+                    <Link to="/login" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
+                        Inicia Sesión
                     </Link>
                 </p>
             </article>
