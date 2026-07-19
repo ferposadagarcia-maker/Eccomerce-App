@@ -83,7 +83,9 @@ export const LoginPage = () => {
                         />
                     </div>
 
-                    <button type="submit" className="btn-submit" disabled={isLoading}>
+                    <button type="submit"
+                        className="btn-submit"
+                        disabled={isLoading}>
                         {isLoading ? 'Verificando...' : 'Iniciar Sesión'}
                     </button>
                 </form>
