@@ -13,7 +13,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     return (
         <article className="product-card">
             <img
-                src={product.imageUrl || 'https://via.placeholder.com/300'}
+                src={product.imageUrl || 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'}
                 alt={product.name}
             />
 

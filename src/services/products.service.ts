@@ -20,7 +20,7 @@ export const getProductsService = async (category?: string): Promise<Product[]> 
             description: data.description,
             category: data.category,
             stock: data.stock,
-            imageUrl: data.imageUrl,
+            imageUrl: data.imageUrl || data.image || 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400',
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
         };
