@@ -1,0 +1,102 @@
+/* src/styles/checkoutPage.css */
+
+@layer components {
+
+    /* Contenedor centralizado para el Checkout minimalista */
+    .checkout-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .checkout-card {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 2.5rem 2rem;
+        margin-top: 2rem;
+        text-align: left;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .checkout-card h3 {
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--foreground);
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+
+    /* Lista de ítems en el checkout */
+    .checkout-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkout-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        border-bottom: 1px dashed var(--border);
+        padding-bottom: 0.75rem;
+        color: var(--foreground);
+    }
+
+    /* Totalizador */
+    .checkout-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .checkout-total span {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .checkout-total strong {
+        font-size: 1.25rem;
+        color: var(--secondary);
+        font-weight: bold;
+    }
+
+    /* --- PANTALLA DE ÉXITO --- */
+    .success-container {
+        text-align: center;
+        padding: 5rem 1.5rem;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .success-container h1 {
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        font-size: 1.75rem;
+    }
+
+    .success-container p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+
+    .success-container strong.order-code {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 1.5rem 0;
+        letter-spacing: 0.05em;
+        color: var(--foreground);
+    }
+}

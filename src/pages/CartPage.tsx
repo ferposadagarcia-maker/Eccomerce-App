@@ -1,9 +1,8 @@
-// src/pages/CartPage.tsx
 import { useCart } from '../hooks/useCart';
 import { Link } from 'react-router-dom';
 
 export const CartPage = () => {
-    const { items, total, updateQuantity, removeFromCart, clearCart } = useCart();
+    const { items, totalItems, updateQuantity, removeFromCart, clearCart } = useCart();
 
     if (items.length === 0) {
         return (
@@ -23,14 +22,13 @@ export const CartPage = () => {
         <main className="cart-container">
             <header style={{ marginBottom: '2.5rem' }}>
                 <h1 style={{ fontSize: '2rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                    Bolsa de Compras
+                    Tu carrito
                 </h1>
                 <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
                     Revisa y confirma las joyas exclusivas añadidas a tu orden
                 </p>
             </header>
 
-            {/* Contenedor de la tabla del carrito */}
             <section className="cart-table-wrapper">
                 <table className="cart-table">
                     <thead>
@@ -105,7 +103,7 @@ export const CartPage = () => {
                 <div className="cart-summary">
                     <h3>Total de la Orden</h3>
                     <p style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--secondary)', marginBottom: '1.5rem' }}>
-                        ${total.toLocaleString()}
+                        ${totalItems.toLocaleString()}
                     </p>
                     <button className="btn-jewelry-primary" style={{ width: '100%' }}>
                         Proceder al Pago

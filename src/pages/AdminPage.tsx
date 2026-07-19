@@ -1,5 +1,3 @@
-// src/pages/AdminPage.tsx
-
 export const AdminPage = () => {
     return (
         <main style={{ padding: '4rem', textAlign: 'center' }}>

@@ -1,11 +1,20 @@
-import type { CartItem } from "./cart.types"
 export type OrderStatus = 'pendiente' | 'procesando' | 'enviado' | 'entregado' | 'cancelado'
+
+export interface OrderItemSnapshot {
+    productId: string;
+    name: string;
+    priceAtPurchase: number;
+    quantity: number;
+}
+
+
 
 export interface Order {
     id: string;
     userId: string;
-    items: CartItem[];
-    totalAmount: number;
+    items: OrderItemSnapshot[];
+    total: number;
     status: OrderStatus;
     createdAt: Date;
+    updatedAt: Date;
 }
