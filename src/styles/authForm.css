@@ -1,55 +1,169 @@
-/* Contenedor centralizado para pantallas de autenticación */
-.auth-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem 1rem;
-    background-color: var(--background);
-}
+@layer components {
 
-/* Tarjeta minimalista de formulario */
-.auth-box {
-    background-color: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 3rem 2rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: var(--shadow-sm);
-}
+    /* Contenedor principal centrado */
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        background-color: var(--background);
+        padding: 2rem 1rem;
+    }
 
-.auth-box h2 {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--foreground);
-}
+    /* Tarjeta de autenticación compacta redondeada */
+    .auth-card {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        width: 100%;
+        max-width: 380px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+    }
 
-/* Grupos de campos */
-.form-group {
-    margin-bottom: 1.25rem;
-    text-align: left;
-}
+    .auth-card h2 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        color: var(--foreground);
+        margin-bottom: 0.25rem;
+    }
 
-.form-group label {
-    display: block;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-}
+    .auth-card p.subtitle {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+    }
 
-/* Mensajes de feedback de error */
-.form-error-alert {
-    background-color: var(--destructive);
-    color: white;
-    font-size: 0.75rem;
-    padding: 0.75rem;
-    border-radius: var(--radius-sm);
-    margin-bottom: 1.5rem;
-    text-align: center;
-    letter-spacing: 0.02em;
+    /* Botón de Google */
+    .google-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: none;
+        border: 1px solid var(--border);
+        background-color: var(--card);
+        color: var(--muted);
+        padding: 0.05rem;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .google-btn:hover {
+        background-color: var(--surface);
+        border-color: var(--border-hover);
+    }
+
+    /* Control de tamaño de la imagen del logo de Google */
+    .google-btn img {
+        width: 50px !important;
+        height: 50px !important;
+        object-fit: contain;
+    }
+
+    /* Divisor "or" */
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 1.5rem 0;
+        font-size: 0.75rem;
+        color: var(--muted);
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .auth-divider:not(:empty)::before {
+        margin-right: 0.75em;
+    }
+
+    .auth-divider:not(:empty)::after {
+        margin-left: 0.75em;
+    }
+
+    /* Formulario e Inputs */
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .auth-field {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .auth-field label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Inputs refinados con línea inferior */
+    .auth-field input {
+        border: none !important;
+        border-bottom: 1px solid var(--border) !important;
+        border-radius: 0 !important;
+        padding: 0.5rem 0 !important;
+        font-size: 0.9rem !important;
+        background-color: transparent !important;
+        outline: none !important;
+        color: var(--foreground) !important;
+        transition: border-color 0.2s ease;
+        width: 100%;
+    }
+
+    .auth-field input:focus {
+        border-bottom-color: var(--border-hover) !important;
+    }
+
+    /* Botón de Envío */
+    .btn-submit {
+        width: 100%;
+        background-color: var(--destructive);
+        color: var(--primary-foreground);
+        border: none;
+        border-radius: 15px;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: var(--primary-hover);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Texto inferior */
+    .auth-footer-text {
+        margin-top: 2rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .auth-footer-text a {
+        color: var(--destructive);
+        font-weight: bold;
+        margin-left: 0.25rem;
+    }
 }

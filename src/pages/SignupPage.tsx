@@ -1,7 +1,9 @@
+// src/pages/SignupPage.tsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signupService } from '../services/auth.service';
+import { signupService, singinWithGoogleService } from '../services/auth.service';
 import { mapAuthError } from '../services/authError.service';
+import googleLogo from '../assets/googleLogo.png';
 
 export const SignupPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -16,7 +18,6 @@ export const SignupPage = () => {
         e.preventDefault();
         setError(null);
 
-        // Validación básica antes de enviar peticiones a Firebase
         if (password !== confirmPassword) {
             setError('Las contraseñas ingresadas no coinciden.');
             return;
@@ -25,10 +26,21 @@ export const SignupPage = () => {
         setIsLoading(true);
 
         try {
-            // Registra el usuario en Firebase Auth e inyecta el rol 'customer' en Firestore
             await signupService(email, password);
+            alert('¡Cuenta de joyería creada con éxito!');
+            navigate('/', { replace: true });
+        } catch (err: any) {
+            setError(mapAuthError(err.code));
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-            alert('¡Cuenta creada con éxito!');
+    const handleGoogleSignup = async () => {
+        setError(null);
+        setIsLoading(true);
+        try {
+            await singinWithGoogleService();
             navigate('/', { replace: true });
         } catch (err: any) {
             setError(mapAuthError(err.code));
@@ -38,14 +50,22 @@ export const SignupPage = () => {
     };
 
     return (
-        <div className="auth-page-container">
-            <article className="auth-box">
-                <h2>Crear Cuenta</h2>
+        <div className="auth-container">
+            <article className="auth-card">
+                <h2>Registrarse</h2>
+                <p className="subtitle">¡Únete hoy mismo a nuestra comunidad!</p>
 
                 {error && <div className="form-error-alert">{error}</div>}
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                <button onClick={handleGoogleSignup} className="google-btn" disabled={isLoading}>
+                    <img src={googleLogo} alt="Google" />
+                    Registrarse con Google
+                </button>
+
+                <div className="auth-divider">o</div>
+
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className="auth-field">
                         <label htmlFor="email">Correo Electrónico</label>
                         <input
                             id="email"
@@ -58,7 +78,7 @@ export const SignupPage = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="auth-field">
                         <label htmlFor="password">Contraseña</label>
                         <input
                             id="password"
@@ -71,34 +91,27 @@ export const SignupPage = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="auth-field">
                         <label htmlFor="confirmPassword">Confirmar Contraseña</label>
                         <input
                             id="confirmPassword"
                             type="password"
                             required
-                            placeholder="Repite la contraseña"
+                            placeholder="Repite tu contraseña"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             disabled={isLoading}
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="btn-jewelry-primary"
-                        style={{ marginTop: '1.5rem', width: '100%' }}
-                        disabled={isLoading}
-                    >
+                    <button type="submit" className="btn-submit" disabled={isLoading}>
                         {isLoading ? 'Registrando...' : 'Registrarse'}
                     </button>
                 </form>
 
-                <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--muted)', textAlign: 'center' }}>
-                    ¿Ya tienes una cuenta activa?{' '}
-                    <Link to="/login" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
-                        Inicia Sesión
-                    </Link>
+                <p className="auth-footer-text">
+                    ¿Ya eres miembro?
+                    <Link to="/login">Inicia Sesión</Link>
                 </p>
             </article>
         </div>

@@ -1,7 +1,9 @@
+// src/pages/LoginPage.tsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginService } from '../services/auth.service';
+import { loginService, singinWithGoogleService } from '../services/auth.service';
 import { mapAuthError } from '../services/authError.service';
+import googleLogo from '../assets/googleLogo.png'; // Asegúrate de tener tu logo en src/assets/
 
 export const LoginPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -17,13 +19,22 @@ export const LoginPage = () => {
         setIsLoading(true);
 
         try {
-            // Llamamos al servicio de login desarrollado con tu profesor
             await loginService(email, password);
-
-            // La navegación ocurre en el try de forma secuencial
             navigate('/', { replace: true });
         } catch (err: any) {
-            // Atajamos el código técnico de Firebase y mostramos el texto traducido
+            setError(mapAuthError(err.code));
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setError(null);
+        setIsLoading(true);
+        try {
+            await singinWithGoogleService();
+            navigate('/', { replace: true });
+        } catch (err: any) {
             setError(mapAuthError(err.code));
         } finally {
             setIsLoading(false);
@@ -31,14 +42,22 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="auth-page-container">
-            <article className="auth-box">
+        <div className="auth-container">
+            <article className="auth-card">
                 <h2>Ingresar</h2>
+                <p className="subtitle">¡Nos alegra tenerte de vuelta!</p>
 
                 {error && <div className="form-error-alert">{error}</div>}
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                <button onClick={handleGoogleLogin} className="google-btn" disabled={isLoading}>
+                    <img src={googleLogo} alt="Google" />
+                    Usar cuenta de Google
+                </button>
+
+                <div className="auth-divider">o</div>
+
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className="auth-field">
                         <label htmlFor="email">Correo Electrónico</label>
                         <input
                             id="email"
@@ -51,34 +70,27 @@ export const LoginPage = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="auth-field">
                         <label htmlFor="password">Contraseña</label>
                         <input
                             id="password"
                             type="password"
                             required
-                            placeholder="••••••"
+                            placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isLoading}
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="btn-jewelry-primary"
-                        style={{ marginTop: '1.5rem', width: '100%' }}
-                        disabled={isLoading}
-                    >
+                    <button type="submit" className="btn-submit" disabled={isLoading}>
                         {isLoading ? 'Verificando...' : 'Iniciar Sesión'}
                     </button>
                 </form>
 
-                <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--muted)', textAlign: 'center' }}>
-                    ¿Aún no tienes cuenta?{' '}
-                    <Link to="/signup" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
-                        Regístrate aquí
-                    </Link>
+                <p className="auth-footer-text">
+                    ¿Aún no tienes cuenta?
+                    <Link to="/signup">Regístrate aquí</Link>
                 </p>
             </article>
         </div>
