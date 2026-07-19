@@ -4,10 +4,12 @@ export interface Product {
     id: string;
     name: string;
     price: number;
-    imageUrl: string;
+    imageUrl?: string;
     category: string;
     description: string;
     stock: number;
+    createdAt?: any;
+    updatedAt?: any;
 }
 
 export interface CatalogFilters {
