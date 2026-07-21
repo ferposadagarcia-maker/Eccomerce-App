@@ -1,19 +1,21 @@
-import { collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
-import type { OrderStatus } from '../types/order.types';
+import { collection, writeBatch, increment, getDocs, query, where, orderBy, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { CartItem } from '../types/cart.types';
+import type { OrderStatus } from '../types/order.types';
 
 export const createOrderService = async (userId: string, items: CartItem[], total: number): Promise<string> => {
+    const batch = writeBatch(db);
+    const ordersRef = collection(db, 'orders');
+    const orderId = doc(ordersRef).id;
+    const orderRef = doc(ordersRef, orderId);
+
     const itemsSnapshot = items.map((item) => ({
         productId: item.product.id,
         name: item.product.name,
         priceAtPurchase: item.product.price,
         quantity: item.quantity,
     }));
-
-    const ordersRef = collection(db, 'orders');
-
-    const docRef = await addDoc(ordersRef, {
+    batch.set(orderRef, {
         userId,
         items: itemsSnapshot,
         total,
@@ -22,7 +24,16 @@ export const createOrderService = async (userId: string, items: CartItem[], tota
         updatedAt: serverTimestamp(),
     });
 
-    return docRef.id;
+    items.forEach((item) => {
+        const productRef = doc(db, 'products', item.product.id);
+        batch.update(productRef, {
+            stock: increment(-item.quantity),
+        });
+    });
+
+    await batch.commit();
+
+    return orderId;
 };
 
 export const getUserOrderService = async (userId: string) => {

@@ -1,33 +1,21 @@
-import { useState, useEffect } from "react";
-import { getAllOrdersService, updateOrderStatusService } from "../services/order.service";
+import { useEffect } from "react";
+import { useOrder } from "../hooks/useOrder";
 import type { OrderStatus } from "../types/order.types";
 import "../styles/orderPage.css";
 
 export const AdminOrdersPage = () => {
-    const [orders, setOrders] = useState<any[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const { orders, loading, fetchAllOrders, updateOrderStatus } = useOrder();
 
-    const fetchAllOrders = async () => {
-        try {
-            const data = await getAllOrdersService();
-            setOrders(data);
-        } catch (error) {
-            console.error("Error al cargar todos los pedidos", error);
-        } finally {
-            setLoading(false);
-        }
-    };
     useEffect(() => {
         fetchAllOrders();
     }, []);
 
     const handleStatusChange = async (orderId: string, nextStatus: OrderStatus) => {
         try {
-            await updateOrderStatusService(orderId, nextStatus);
-            alert(" Estado del pedido actualizado con éxito ");
+            await updateOrderStatus(orderId, nextStatus);
+            alert(" Pedido actualizado con éxito ");
             await fetchAllOrders();
         } catch (error) {
-            console.error(error);
             alert(" No se pudo actualizar el estado ");
         }
     };
@@ -45,7 +33,7 @@ export const AdminOrdersPage = () => {
     if (loading) {
         return (
             <div style={{ padding: '3rem', textAlign: 'center' }}>
-                <p>Cargando órdenes globales del sistema...</p>
+                <p>Cargando todas las órdenes...</p>
             </div>
         );
     }
@@ -53,7 +41,7 @@ export const AdminOrdersPage = () => {
         <div>
             <h2 className="admin-view-title">Gestión de Pedidos</h2>
             <p className="admin-view-subtitle">
-                Supervisión de transacciones y control de estado de envío
+                Órdenes de usuarios y control de envíos
             </p>
 
             {orders.length === 0 ? (
