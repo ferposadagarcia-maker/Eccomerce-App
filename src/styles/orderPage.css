@@ -1,0 +1,54 @@
+@layer components {
+
+    /* Contenedor del Historial */
+    .orders-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+    }
+
+    .orders-table-wrapper {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        overflow-x: auto;
+        background-color: var(--card);
+        margin-top: 2rem;
+    }
+
+    /* Distintivos (Badges) de Estado de la Orden */
+    .status-badge {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    /* Colores alineados a la marca */
+    .badge-pending {
+        background-color: #fef3c7;
+        /* Amarillo cálido */
+        color: #d97706;
+    }
+
+    .badge-processing {
+        background-color: #dbeafe;
+        /* Azul sutil */
+        color: #2563eb;
+    }
+
+    .badge-completed {
+        background-color: #d1fae5;
+        /* Verde éxito */
+        color: #059669;
+    }
+
+    .badge-cancelled {
+        background-color: var(--color-terracotta-light);
+        /* Terracota de advertencia */
+        color: var(--color-reddish-main);
+    }
+}

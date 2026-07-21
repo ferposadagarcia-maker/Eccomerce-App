@@ -12,6 +12,8 @@ import { AdminProductsPage } from './pages/AdminProductPage';
 import { ProductFormPage } from './pages/ProductFormPage';
 import { CartPage } from './pages/CartPage';
 import { OrderSuccessPage } from './pages/OrderSuccessPage';
+import { AdminOrdersPage } from './pages/AdminOrderPage';
+import { OrderPage } from './pages/OrdersPage';
 import { WishlistPage } from './pages/WishlistPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 
@@ -33,6 +35,7 @@ export const AppRoutes = () => {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/checkout/success/:orderId" element={<OrderSuccessPage />} />
+              <Route path="/orders" element={<OrderPage />} />
             </Route>
 
             {/* Rutas protegidas para administradores */}
@@ -44,11 +47,12 @@ export const AppRoutes = () => {
                 </AdminRoute>
               }
             >
-              {/* Al entrar a /admin redirige por defecto a la subruta de productos (/admin/products) */}
+              {/* Rutas de Admin */}
               <Route index element={<Navigate to="products" replace />} />
               <Route path="products" element={<AdminProductsPage />} />
               <Route path="products/new" element={<ProductFormPage />} />
               <Route path="products/:id/edit" element={<ProductFormPage />} />
+              <Route path="orders" element={<AdminOrdersPage />} />
             </Route>
 
           </Route>
