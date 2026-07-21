@@ -11,13 +11,12 @@ import type { AuthUser } from "../types/auth.types";
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signupService = async (email: string, password: string) => {
+export const signupService = async (email: string, password: string): Promise<void> => {
   const credentials = await createUserWithEmailAndPassword(
     auth,
     email,
     password,
   );
-
   const uid = credentials.user.uid;
   await setDoc(doc(db, 'users', uid), {
     email,
@@ -25,11 +24,11 @@ export const signupService = async (email: string, password: string) => {
   });
 };
 
-export const loginService = async (email: string, password: string) => {
+export const loginService = async (email: string, password: string): Promise<void> => {
   await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const singinWithGoogleService = async () => {
+export const signinWithGoogleService = async (): Promise<void> => {
   const credentials = await signInWithPopup(auth, googleProvider);
   const user = credentials.user;
 
@@ -37,20 +36,16 @@ export const singinWithGoogleService = async () => {
   const snapshot = await getDoc(userRef);
 
   if (!snapshot.exists()) {
-    await setDoc(
-      userRef,
-      {
-        email: user.email,
-        role: "customer",
-      },
-      {
-        merge: true,
-      },
-    );
+    await setDoc(userRef, {
+      email: user.email,
+      role: "customer",
+    }, {
+      merge: true,
+    });
   }
 };
 
-export const signoutService = async () => {
+export const signoutService = async (): Promise<void> => {
   await signOut(auth);
 };
 

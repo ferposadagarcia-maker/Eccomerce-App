@@ -1,11 +1,11 @@
-import React from 'react';
-import { AuthProvider } from '../contexts/AuthContext';
+import { type ReactNode } from 'react';
+import { AuthProvider } from '../contexts/auth/AuthProvider';
 import { ProductProvider } from '../contexts/products/ProductContext';
 import { CartProvider } from '../contexts/cart/CartContext';
-import { WishlistProvider } from '../contexts/wishlist/wishlistContext';
+import { WishlistProvider } from '../contexts/wishlist/WishlistContext';
 
 interface AppProvidersProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export const AppProviders = ({ children }: AppProvidersProps) => {

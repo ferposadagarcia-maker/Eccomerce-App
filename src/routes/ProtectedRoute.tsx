@@ -1,13 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth';
 
 interface ProtectedRouteProps {
     allowedRoles?: ("customer" | "admin")[];
 }
 
 export const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
-    const { user, isLoading } = useAuth();
-    if (isLoading) {
+    const { user, loading } = useAuth();
+    if (loading) {
         return <div>Loading...</div>;
     }
     if (!user) {

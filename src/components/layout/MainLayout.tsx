@@ -4,7 +4,7 @@ import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
 
 export const MainLayout = () => {
-    const { user, logout } = useAuth();
+    const { user, signout } = useAuth();
     const { items } = useCart();
     const { wishlistItems } = useWishlist();
 
@@ -35,7 +35,7 @@ export const MainLayout = () => {
                         {user ? (
                             <div className="user-menu">
                                 <span>{user.email}</span>
-                                <button onClick={logout} className="logout-btn">
+                                <button onClick={signout} className="logout-btn">
                                     Salir
                                 </button>
                             </div>

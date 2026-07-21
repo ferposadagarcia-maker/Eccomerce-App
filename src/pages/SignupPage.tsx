@@ -1,7 +1,6 @@
-// src/pages/SignupPage.tsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signupService, singinWithGoogleService } from '../services/auth.service';
+import { useAuth } from '../hooks/useAuth';
 import { mapAuthError } from '../services/authError.service';
 import googleLogo from '../assets/googleLogo.png';
 
@@ -13,6 +12,8 @@ export const SignupPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    const { signup, signinWithGoogle } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,7 +27,7 @@ export const SignupPage = () => {
         setIsLoading(true);
 
         try {
-            await signupService(email, password);
+            await signup(email, password);
             alert('¡Cuenta de joyería creada con éxito!');
             navigate('/', { replace: true });
         } catch (err: any) {
@@ -40,7 +41,7 @@ export const SignupPage = () => {
         setError(null);
         setIsLoading(true);
         try {
-            await singinWithGoogleService();
+            await signinWithGoogle();
             navigate('/', { replace: true });
         } catch (err: any) {
             setError(mapAuthError(err.code));

@@ -1,7 +1,6 @@
-// src/pages/LoginPage.tsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginService, singinWithGoogleService } from '../services/auth.service';
+import { useAuth } from '../hooks/useAuth';
 import { mapAuthError } from '../services/authError.service';
 import googleLogo from '../assets/googleLogo.png'; // Asegúrate de tener tu logo en src/assets/
 
@@ -9,35 +8,36 @@ export const LoginPage = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    const { login, signinWithGoogle } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-        setIsLoading(true);
-
+        setLoading(true);
         try {
-            await loginService(email, password);
+            await login(email, password);
             navigate('/', { replace: true });
         } catch (err: any) {
             setError(mapAuthError(err.code));
         } finally {
-            setIsLoading(false);
+            setLoading(false);
         }
     };
 
-    const handleGoogleLogin = async () => {
+    const handleGoogleSignin = async () => {
         setError(null);
-        setIsLoading(true);
+        setLoading(true);
         try {
-            await singinWithGoogleService();
+            await signinWithGoogle();
             navigate('/', { replace: true });
         } catch (err: any) {
             setError(mapAuthError(err.code));
         } finally {
-            setIsLoading(false);
+            setLoading(false);
         }
     };
 
@@ -49,7 +49,7 @@ export const LoginPage = () => {
 
                 {error && <div className="form-error-alert">{error}</div>}
 
-                <button onClick={handleGoogleLogin} className="google-btn" disabled={isLoading}>
+                <button onClick={handleGoogleSignin} className="google-btn" disabled={loading}>
                     <img src={googleLogo} alt="Google" />
                     Usar cuenta de Google
                 </button>
@@ -66,7 +66,7 @@ export const LoginPage = () => {
                             placeholder="correo@ejemplo.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            disabled={isLoading}
+                            disabled={loading}
                         />
                     </div>
 
@@ -76,17 +76,17 @@ export const LoginPage = () => {
                             id="password"
                             type="password"
                             required
-                            placeholder="••••••••"
+                            placeholder="contraseña"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            disabled={isLoading}
+                            disabled={loading}
                         />
                     </div>
 
                     <button type="submit"
                         className="btn-submit"
-                        disabled={isLoading}>
-                        {isLoading ? 'Verificando...' : 'Iniciar Sesión'}
+                        disabled={loading}>
+                        {loading ? 'Verificando...' : 'Iniciar Sesión'}
                     </button>
                 </form>
 
