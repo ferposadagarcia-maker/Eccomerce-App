@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAllOrdersService, updateOrderStatusService } from "../services/order.service";
 import type { OrderStatus } from "../types/order.types";
-import "../styles/ordersPage.css";
+import "../styles/orderPage.css";
 
 export const AdminOrdersPage = () => {
     const [orders, setOrders] = useState<any[]>([]);
