@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { createProduct, updateProduct } from '../services/products.service';
+import { uploadImage } from '../services/upload.service';
 
 
 type Category = 'anillos' | 'collares' | 'pulseras';
@@ -33,6 +34,8 @@ export const ProductFormPage = () => {
     const { id } = useParams<{ id: string }>();
     const { products, refreshProducts } = useProducts();
     const navigate = useNavigate();
+
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const [formState, setFormState] = useState<ProductFormState>({
         fields: {
@@ -70,10 +73,7 @@ export const ProductFormPage = () => {
     const handleInputChange = (field: keyof ProductFormFields, value: any) => {
         setFormState((prev) => ({
             ...prev,
-            fields: {
-                ...prev.fields,
-                [field]: value
-            }
+            fields: { ...prev.fields, [field]: value }
         }));
     };
 
@@ -81,16 +81,22 @@ export const ProductFormPage = () => {
         e.preventDefault();
         setFormState((prev) => ({ ...prev, status: 'submitting', globalError: null }));
 
-        const productPayload = {
-            name: formState.fields.name,
-            price: Number(formState.fields.price),
-            description: formState.fields.description,
-            category: formState.fields.category,
-            imageUrl: formState.fields.imageUrl,
-            stock: Number(formState.fields.stock)
-        };
-
         try {
+            let s3Url = formState.fields.imageUrl;
+
+            if (selectedFile) {
+                s3Url = await uploadImage(selectedFile);
+            }
+
+            const productPayload = {
+                name: formState.fields.name,
+                price: Number(formState.fields.price),
+                description: formState.fields.description,
+                category: formState.fields.category,
+                imageUrl: s3Url,
+                stock: Number(formState.fields.stock)
+            };
+
             if (id) {
                 await updateProduct(id, productPayload);
             } else {
@@ -98,31 +104,21 @@ export const ProductFormPage = () => {
             }
 
             await refreshProducts();
-            setFormState((prev) => ({ ...prev, status: 'success' }));
             navigate('/admin');
         } catch (error: any) {
             console.error(error);
-
-            if (error.code === 'permission-denied') {
-                setFormState((prev) => ({
-                    ...prev,
-                    status: 'error',
-                    globalError: 'No tiene permisos de administrador para realizar esta acción de catálogo.'
-                }));
-            } else {
-                setFormState((prev) => ({
-                    ...prev,
-                    status: 'error',
-                    globalError: 'Ocurrió un error al intentar guardar los cambios de la joya.'
-                }));
-            }
+            setFormState((prev) => ({
+                ...prev,
+                status: 'error',
+                globalError: 'Ocurrió un error al procesar la imagen o guardar la joya.'
+            }));
         }
     };
 
     const isSubmitting = formState.status === 'submitting';
 
     return (
-        <div style={{ maxWidth: '500px' }}>
+        <div style={{ maxWidth: '400px' }}>
             <h2 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.25rem', marginBottom: '1.5rem' }}>
                 {id ? 'Editar Joya Exclusiva' : 'Añadir Nueva Joya'}
             </h2>
@@ -136,7 +132,7 @@ export const ProductFormPage = () => {
                         id="prod-name"
                         type="text"
                         required
-                        placeholder="Ej. Anillo Étoile Diamante"
+                        placeholder="Ej. Anillo Solitario Oro"
                         value={formState.fields.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
                         disabled={isSubmitting}
@@ -174,7 +170,7 @@ export const ProductFormPage = () => {
                         id="prod-price"
                         type="number"
                         required
-                        value={formState.fields.price}
+                        value={formState.fields.price || ''}
                         onChange={(e) => handleInputChange('price', e.target.value)}
                         disabled={isSubmitting}
                     />
@@ -186,7 +182,7 @@ export const ProductFormPage = () => {
                         id="prod-stock"
                         type="number"
                         required
-                        value={formState.fields.stock}
+                        value={formState.fields.stock || ''}
                         onChange={(e) => handleInputChange('stock', e.target.value)}
                         disabled={isSubmitting}
                     />
@@ -198,23 +194,28 @@ export const ProductFormPage = () => {
                         id="prod-desc"
                         type="text"
                         required
-                        placeholder="Materiales, kilates, acabados..."
+                        placeholder="Materiales, quilates, detalles..."
                         value={formState.fields.description}
                         onChange={(e) => handleInputChange('description', e.target.value)}
                         disabled={isSubmitting}
                     />
                 </div>
 
-                <div className="auth-field">
-                    <label htmlFor="prod-img">Enlace de Imagen</label>
+                <div className="auth-field" style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
+                    <label htmlFor="prod-file">Fotografía de la Joya</label>
                     <input
-                        id="prod-img"
-                        type="text"
-                        placeholder="https://ejemplo.com/joya.jpg"
-                        value={formState.fields.imageUrl}
-                        onChange={(e) => handleInputChange('imageUrl', e.target.value)}
+                        id="prod-file"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setSelectedFile(e.target.files ? e.target.files[0] : null)}
                         disabled={isSubmitting}
+                        style={{ border: 'none', padding: '0.5rem 0', cursor: 'pointer' }}
                     />
+                    {id && formState.fields.imageUrl && !selectedFile && (
+                        <span style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.25rem' }}>
+                            Dejar vacío para conservar la imagen actual.
+                        </span>
+                    )}
                 </div>
 
                 <button
