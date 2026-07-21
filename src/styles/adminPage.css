@@ -104,3 +104,53 @@
         color: var(--destructive);
     }
 }
+
+/* src/styles/adminPage.css (Agregar al final) */
+
+/* Títulos y Subtítulos de las vistas */
+.admin-view-title {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.5rem;
+    color: var(--foreground);
+}
+
+.admin-view-subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Estado vacío en administración */
+.admin-empty-state {
+    padding: 3rem;
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    margin-top: 2rem;
+    color: var(--muted);
+}
+
+/* Imagen miniatura de la joya en la fila */
+.admin-row-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface);
+}
+
+.admin-row-name {
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.admin-row-price {
+    text-align: center;
+    font-weight: 600;
+}
+
+.admin-row-stock {
+    text-align: center;
+    color: var(--muted);
+}
