@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: Props) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-            if (firebaseUser) {
+            if (!firebaseUser) {
                 setUser(null);
                 setLoading(false);
                 return;
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: Props) => {
                 const profile = await getUserProfile(firebaseUser.uid);
                 setUser(profile);
             } catch (error) {
-                console.error("Error al obtener el rol del usuario", error);
+                console.error("Error al obtener el perfil del usuario", error);
                 setUser(null);
             } finally {
                 setLoading(false)
