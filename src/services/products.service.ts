@@ -5,8 +5,11 @@ import type { Product } from '../types/product.types';
 export const getProductsService = async (category?: string): Promise<Product[]> => {
     const productsRef = collection(db, 'products');
 
+    const normalizedCategory = category ? category.trim().toLowerCase() : "all";
+
+
     const q = category && category !== 'all'
-        ? query(productsRef, where('category', '==', category))
+        ? query(productsRef, where('category', '==', normalizedCategory))
         : productsRef;
 
     const snapshot = await getDocs(q);

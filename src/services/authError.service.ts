@@ -1,20 +1,21 @@
-export const mapAuthError = (code: string) => {
+export const mapAuthError = (code: string): string => {
     switch (code) {
-        case "auth/invalid-email":
-        case "auth/wrong-password":
-        case "auth/user-not-found":
-            return "El correo electrónico o la contraseña son incorrectos. Por favor, intenta nuevamente.";
-
-        case "auth/too-many-requests":
-            return "Demasiados intentos fallidos. Por favor, intenta nuevamente en unos minutos";
-
-        case "auth/email-already-in-use":
-            return "Este correo electrónico ya está registrado. Usa otra dirección o intenta iniciar sesión";
-
-        case "auth/weak-password":
-            return "La contraseña es demasiado débil. Por favor, elige una contraseña más segura.";
-
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
+            return 'La contraseña ingresada es incorrecta. Por favor, verifíquela e intente nuevamente.';
+        case 'auth/user-not-found':
+            return 'No se encontró ninguna cuenta registrada con este correo electrónico.';
+        case 'auth/email-already-in-use':
+            return 'Este correo electrónico ya se encuentra registrado en nuestro sistema.';
+        case 'auth/weak-password':
+            return 'Por motivos de seguridad, la contraseña debe contener al menos 6 caracteres.';
+        case 'auth/invalid-email':
+            return 'El formato del correo electrónico ingresado no es válido.';
+        case 'auth/too-many-requests':
+            return 'Su acceso ha sido bloqueado temporalmente debido a demasiados intentos fallidos.';
+        case 'auth/user-disabled':
+            return 'Esta cuenta de usuario ha sido inhabilitada por el administrador.';
         default:
-            return "Ocurrió un error inesperado. Por favor, intenta mas tarde.";
+            return 'Ocurrió un inconveniente inesperado en el servidor de autenticación. Intente más tarde.';
     }
 };
