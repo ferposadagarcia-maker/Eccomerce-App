@@ -1,8 +1,7 @@
-// src/pages/CatalogPage.tsx
 import { useState, useEffect } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { useDebounce } from '../hooks/useDebounce';
-import { ProductCard } from '../components/ui/ProductCard';
+import { ProductGrid } from '../components/ui/ProductGrid';
 import { FilterBar } from '../components/ui/FilterBar';
 
 export const CatalogPage = () => {
@@ -62,11 +61,7 @@ export const CatalogPage = () => {
             )}
 
             {!isLoading && !error && filteredProducts.length > 0 && (
-                <section className="catalog-grid">
-                    {filteredProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </section>
+                <ProductGrid products={filteredProducts} />
             )}
         </main>
     );
