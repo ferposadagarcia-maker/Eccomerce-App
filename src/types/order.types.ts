@@ -7,14 +7,12 @@ export interface OrderItemSnapshot {
     quantity: number;
 }
 
-
-
 export interface Order {
     id: string;
     userId: string;
     items: OrderItemSnapshot[];
     total: number;
     status: OrderStatus;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: any;
+    updatedAt: any;
 }
