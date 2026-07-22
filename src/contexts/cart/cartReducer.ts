@@ -1,12 +1,13 @@
-// src/contexts/cart/cartReducer.ts
 import type { CartState, CartActions, CartItem } from "../../types/cart.types";
 
-// Función auxiliar para calcular la cantidad de artículos o el total
+export const initialState: CartState = {
+    items: [],
+    totalItems: 0
+};
 const calculateTotal = (items: CartItem[]): number => {
-    return items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    return items.reduce((total, item) => total + item.product.price * item.quantity, 0)
 };
 
-// NOTA: Asegúrate de usar CartActions (con S) en el segundo parámetro
 export const cartReducer = (state: CartState, action: CartActions): CartState => {
     switch (action.type) {
         case 'ADD_ITEM': {
@@ -29,7 +30,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
 
             return {
                 items: newItems,
-                totalItems: calculateTotal(newItems), // <--- Correcto: totalItems
+                totalItems: calculateTotal(newItems),
             };
         }
 
@@ -41,7 +42,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
 
             return {
                 items: newItems,
-                totalItems: calculateTotal(newItems), // <--- Correcto: totalItems
+                totalItems: calculateTotal(newItems),
             };
         }
 
@@ -62,7 +63,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
 
             return {
                 items: newItems,
-                totalItems: calculateTotal(newItems), // <--- Correcto: totalItems
+                totalItems: calculateTotal(newItems),
             };
         }
 

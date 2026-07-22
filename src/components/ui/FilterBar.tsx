@@ -1,5 +1,3 @@
-// src/components/ui/FilterBar.tsx
-
 interface FilterBarProps {
     selectedCategory: string;
     onSelectCategory: (category: string) => void;

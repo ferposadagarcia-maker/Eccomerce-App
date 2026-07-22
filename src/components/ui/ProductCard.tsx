@@ -29,7 +29,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <WishlistButton product={product} />
 
-                        <button onClick={() => addToCart(product)}>
+                        <button onClick={() => addToCart(product)} disabled={product.stock === 0}>
                             Añadir
                         </button>
                     </div>
