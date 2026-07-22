@@ -17,14 +17,12 @@ describe('Pruebas de la Lista de Deseos (Wishlist)', () => {
     it('Debe alternar (toggle) un producto en la lista de deseos', () => {
         const { result } = renderHook(() => useWishlist(), { wrapper });
 
-        // Agregamos la joya
         act(() => {
             result.current.toggleWishlist(productFixture);
         });
         expect(result.current.wishlistItems).toHaveLength(1);
         expect(result.current.isInWishlist(productFixture.id)).toBe(true);
 
-        // La removemos
         act(() => {
             result.current.toggleWishlist(productFixture);
         });
