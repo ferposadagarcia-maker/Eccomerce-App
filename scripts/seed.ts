@@ -22,12 +22,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const IMAGES_BY_CATEGORY: Record<CategoryId, string> = {
-  anillos: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400",
-  collares: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400",
-  pulseras: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400",
-};
-
 const CATALOG: Record<CategoryId, string[]> = {
   anillos: [
     "Anillo de Diamantes Étoile",
@@ -109,7 +103,28 @@ function createDescription(name: string, category: CategoryId): string {
   return `${name} es una pieza de alta joyería exclusiva de nuestra colección de ${category}. Ha sido elaborada a mano con metales nobles y gemas seleccionadas, ofreciendo un acabado pulido eterno y un diseño de lujo ideal para ocasiones trascendentales.`;
 }
 
+const BUCKET_NAME = "mi-ecommerce-products-477504162803-mx-central-1-an";
+const AWS_REGION = "mx-central-1";
+
 async function seed() {
+  let idCounter = 1;
+
+  const products = Object.entries(CATALOG).flatMap(([categoryId, names]) =>
+    names.map((name) => {
+      const s2ImageUrl: string = `https://${BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/joya_${idCounter}.jpg`;
+      idCounter++;
+
+      return {
+        name,
+        nameLower: name.toLowerCase(),
+        image: s2ImageUrl,
+        description: createDescription(name, categoryId as CategoryId),
+        price: randomPrice(),
+        stock: randomStock(),
+        categoryId: categoryId as CategoryId,
+      };
+    })
+  );
 
   console.log("🔍 COMPROBACIÓN DE CREDENCIALES:", {
     apiKey: firebaseConfig.apiKey ? "Cargada con éxito ✔" : "FALTANTE ❌",
@@ -120,18 +135,6 @@ async function seed() {
     console.error("❌ ERROR: No se pudieron cargar las variables de entorno. Verifica que tu archivo .env esté en la raíz del proyecto.");
     process.exit(1);
   }
-
-  const products = Object.entries(CATALOG).flatMap(([categoryId, names]) =>
-    names.map((name) => ({
-      name,
-      nameLower: name.toLowerCase(),
-      image: IMAGES_BY_CATEGORY[categoryId as CategoryId],
-      description: createDescription(name, categoryId as CategoryId),
-      price: randomPrice(),
-      stock: randomStock(),
-      categoryId: categoryId as CategoryId,
-    })),
-  );
 
   console.log(`🌱 Sembrando ${products.length} productos de joyería fina...\n`);
 

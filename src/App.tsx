@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AppProviders } from './theme/AppProviders';
+import { AppProviders } from './contexts/AppProviders';
 import { MainLayout } from './components/layout/MainLayout';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { AdminLayout } from './components/layout/AdminLayout';
@@ -23,14 +23,12 @@ export const AppRoutes = () => {
       <BrowserRouter>
         <Routes>
 
-          {/* Rutas públicas */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<CatalogPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="wishlist" element={<WishlistPage />} />
 
-            {/* Rutas protegidas para usuarios autenticados */}
             <Route element={<ProtectedRoute />}>
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
@@ -38,7 +36,6 @@ export const AppRoutes = () => {
               <Route path="/orders" element={<OrderPage />} />
             </Route>
 
-            {/* Rutas protegidas para administradores */}
             <Route
               path="/admin"
               element={
@@ -47,7 +44,6 @@ export const AppRoutes = () => {
                 </AdminRoute>
               }
             >
-              {/* Rutas de Admin */}
               <Route index element={<Navigate to="products" replace />} />
               <Route path="products" element={<AdminProductsPage />} />
               <Route path="products/new" element={<ProductFormPage />} />
