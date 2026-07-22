@@ -3,6 +3,15 @@
 Este proyecto es una **Single Page Application (SPA) Full Stack** de comercio electrónico especializada en joyería fina y de alta gama ("Athenea Joyería"), desarrollada como Proyecto Integrador para la especialización Frontend de Henry. La aplicación implementa arquitectura por capas, tipado estricto con TypeScript, persistencia en la nube en tiempo real, carga segura de archivos en la nube y una completa suite de pruebas automatizadas.
 
 ---
+🌐 **Link de la App:** https://eccomerce-5fhm03lm2-ferposadagarcia-2701s-projects.vercel.app/
+
+## 📸 Capturas de Pantalla de la App
+
+### 1. Admin Page
+![Admin Page](src/assets/admin-page.jpg)
+
+### 2. Customer Page
+![Customer Page](src/assets/customer-page.jpg)
 
 ## 🛠️ Tecnologías y Herramientas
 
@@ -192,3 +201,6 @@ Para ejecutar los tests en tu terminal localmente, utiliza:
 ```bash
 npm run test
 ```
+## 👩🏻‍💻 Desarrolladora
+
+Fernanda Posada
