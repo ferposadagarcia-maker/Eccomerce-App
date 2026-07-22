@@ -3,6 +3,7 @@ import { useProducts } from '../hooks/useProducts';
 import { useDebounce } from '../hooks/useDebounce';
 import { ProductGrid } from '../components/ui/ProductGrid';
 import { FilterBar } from '../components/ui/FilterBar';
+import "../styles/catalogPage.css"
 
 export const CatalogPage = () => {
     const { filteredProducts, isLoading, error, filters, setCategory, setSearchQuery } = useProducts();
@@ -16,30 +17,32 @@ export const CatalogPage = () => {
 
     return (
         <main className="catalog-container">
-            <header style={{ marginBottom: '2rem' }}>
-                <h1 style={{ fontSize: '2rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                    Colecciones Exclusivas
-                </h1>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>
-                    Alta joyería fina diseñada para perdurar
-                </p>
+            <header className="catalog-header">
+                <div>
+                    <h1 style={{ fontSize: '3.5rem', textTransform: 'none', letterSpacing: '0.1em', margin: 0 }}>
+                        Athenea
+                    </h1>
+                    <p style={{ color: 'var(--muted)', fontSize: '0.75rem', margin: '0.5rem 0 0 0' }}>
+                        Lo esencial, nunca pasa desapercibido.
+                    </p>
+                </div>
+
+                <div className="catalog-search-area">
+                    <input
+                        type="text"
+                        placeholder="Buscar una pieza especial..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="catalog-search-input"
+                    />
+                </div>
             </header>
 
-            {/* Controles de Búsqueda y Filtros */}
-            <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
-                <input
-                    type="text"
-                    placeholder="Buscar una pieza especial..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ maxWidth: '400px' }}
-                />
-
-                <FilterBar
-                    selectedCategory={filters.category}
-                    onSelectCategory={setCategory}
-                />
-            </section>
+            {/* Barra de Categorías */}
+            <FilterBar
+                selectedCategory={filters.category}
+                onSelectCategory={setCategory}
+            />
 
             {/* Controladores de Estados de Carga o Errores */}
             {isLoading && (

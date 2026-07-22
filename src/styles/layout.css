@@ -1,0 +1,49 @@
+@layer components {
+
+    /* Estructura general de la aplicación */
+    .app-shell {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .main-header {
+        background-color: var(--card);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 2rem;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .brand-logo {
+        font-size: 1.5rem;
+        font-weight: 300;
+        font-family: 'Cormorant Unicase', serif;
+        letter-spacing: 0.15em;
+        color: var(--primary);
+        text-align: left;
+    }
+
+    .header-nav {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .main-footer {
+        background-color: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 2.5rem;
+        text-align: center;
+        margin-top: auto;
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+    }
+}

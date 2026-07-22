@@ -1,109 +1,52 @@
 :root {
-
-    /* Floral White */
+    /* Paleta Oficial "Old Money" de tu Guía */
+    --color-white: #ffffff;
+    --color-pastel-grey: #d2c8be;
+    --color-gray-brown: #574944;
+    --color-dark-red: #7a0000;
+    --color-black: #000000;
     --color-floral-light: #FFFCF5;
-    --color-floral-main: #FFD166;
-    --color-floral-dark: #CC8F00;
 
-    /* Almond Cream */
-    --color-almond-light: #F8F3ED;
-    --color-almond-main: #E5D3BF;
-    --color-almond-dark: #B5834A;
-
-    /* Coffee Bean */
-    --color-coffee-light: #DDC7BB;
-    --color-coffee-main: #76503B;
-    --color-coffee-dark: #221711;
-
-    /* Terracotta Clay */
-    --color-terracotta-light: #EED1CC;
-    --color-terracotta-main: #955B4D;
-    --color-terracotta-dark: #653E34;
-
-    /* Reddish Brown */
-    --color-reddish-light: #E4BCB4;
-    --color-reddish-main: #8C4031;
-    --color-reddish-dark: #4B231B;
-
-    /* Background */
+    /* Mapeo Semántico */
     --background: var(--color-floral-light);
-    /* Fondo de la web cálido y limpio */
-    --surface: var(--color-almond-light);
+    /* Fondo cálido pastel */
+    --surface: #faf6f0;
     /* Secciones alternas */
-    --card: #ffffff;
-    /* Tarjetas de producto */
+    --card: var(--color-white);
+    /* Tarjetas de productos puras */
 
-    /* Text */
-    --foreground: var(--color-coffee-dark);
-    /* Texto oscuro suave */
-    --muted: var(--color-coffee-main);
-    /* Subtextos o detalles de menor jerarquía */
+    /* Textos */
+    --foreground: var(--color-gray-brown);
+    /* Texto marrón grisáceo suave */
+    --muted: #82726d;
+    /* Subtextos o detalles secundarios */
 
-    /* Brand (Primarios basados en Coffee Bean / Acentos dorados en botones) */
-    --primary: var(--color-coffee-main);
-    --primary-hover: var(--color-coffee-dark);
-    --primary-foreground: var(--color-floral-light);
+    /* Acentuaciones de Marca (Rojo Borgoña de tu guía) */
+    --primary: var(--color-dark-red);
+    --primary-hover: var(--color-gray-brown);
+    --primary-foreground: var(--color-white);
 
-    /* Secondary (Acentos con Almond/Gold) */
-    --secondary: var(--color-almond-dark);
-    --secondary-hover: var(--color-almond-main);
-    --secondary-foreground: var(--color-coffee-dark);
+    /* Elementos Secundarios (Gris Pastel de tu guía) */
+    --secondary: var(--color-gray-brown);
+    --secondary-hover: var(--color-pastel-grey);
+    --secondary-foreground: var(--color-gray-brown);
 
-    /* Borders */
-    --border: var(--color-almond-main);
-    --border-hover: var(--color-coffee-light);
+    /* Bordes Sutiles y Finos */
+    --border: var(--color-pastel-grey);
+    --border-hover: var(--color-gray-brown);
 
     /* Feedback */
     --success: #2e7d32;
     --warning: #ed6c02;
-    --destructive: var(--color-reddish-main);
-    /* Reddish Brown funciona muy bien como un tono alerta sofisticado */
+    --destructive: var(--color-dark-red);
 
-    /* Border Radius (Esquinas sutiles para estilo de lujo) */
+    /* Esquinas Finas de Lujo */
     --radius-sm: 2px;
     --radius-md: 4px;
-    --radius-lg: 8px;
+    --radius-lg: 12px;
+    /* Mayor suavidad para arcos orgánicos */
 
-    /* Spacing (Escala basada en múltiplos de 4px) */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-
-    /* Shadows (Sombreados finos y discretos) */
-    --shadow-sm: 0 1px 2px 0 rgba(34, 23, 17, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(34, 23, 17, 0.08), 0 2px 4px -1px rgba(34, 23, 17, 0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(34, 23, 17, 0.1), 0 4px 6px -2px rgba(34, 23, 17, 0.05);
-}
-
-/* Modo oscuro */
-.dark {
-    /* Background */
-    --background: var(--color-coffee-dark);
-    --surface: #1d140e;
-    --card: #291c14;
-
-    /* Text */
-    --foreground: var(--color-almond-light);
-    --muted: var(--color-coffee-light);
-
-    /* Brand (Acentos dorados destacan mejor en modo oscuro) */
-    --primary: var(--color-almond-main);
-    --primary-hover: var(--color-almond-light);
-    --primary-foreground: var(--color-coffee-dark);
-
-    /* Secondary */
-    --secondary: var(--color-coffee-main);
-    --secondary-hover: var(--color-coffee-light);
-    --secondary-foreground: var(--color-floral-light);
-
-    /* Borders */
-    --border: #36251b;
-    --border-hover: var(--color-coffee-main);
-
-    /* Feedback en modo oscuro */
-    --success: #4caf50;
-    --warning: #ff9800;
-    --destructive: var(--color-reddish-light);
+    /* Sombras Discretas de Lujo (Casi imperceptibles) */
+    --shadow-sm: 0 1px 3px 0 rgba(87, 73, 68, 0.03);
+    --shadow-md: 0 4px 20px -2px rgba(87, 73, 68, 0.04);
 }

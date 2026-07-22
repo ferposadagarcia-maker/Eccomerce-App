@@ -1,0 +1,191 @@
+@layer components {
+
+    /* Contenedor del Catálogo */
+    .catalog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .catalog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2.5rem;
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    .catalog-search-area {
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+    }
+
+    .catalog-search-input {
+        width: 300px;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        outline: none;
+        font-size: 0.85rem;
+        background-color: var(--card);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .catalog-search-input:focus {
+        border-color: var(--border-hover);
+        box-shadow: 0 0 0 1px var(--border-hover);
+    }
+
+    @media (max-width: 768px) {
+        .catalog-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+        }
+
+        .catalog-search-input {
+            width: 100%;
+        }
+    }
+
+    /* Grid del catálogo con CSS estándar */
+    .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    /* Tarjeta de Joyería Estilo Boutique (Arco orgánico de tu guía) */
+    .product-card {
+        background-color: var(--card);
+        border: 1px solid transparent;
+        border-radius: 120px 120px var(--radius-sm) var(--radius-sm);
+        /* Silueta arqueada superior */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        padding: 0.7rem;
+        /* Enmarca la joya de forma fina */
+    }
+
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Redondeado interno de la imagen para que encaje simétricamente en el arco */
+    .product-card img {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 110px 110px 0 0;
+        /* Arco interno perfecto en la imagen */
+        background-color: var(--surface);
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .product-card:hover img {
+        transform: scale(1.04);
+        /* Zoom muy sutil y suave */
+    }
+
+    /* Contenedor de texto de la tarjeta (Centrado elegante) */
+    .product-card-body {
+        padding: 1.5rem 1rem 1rem 1rem;
+        text-align: center;
+    }
+
+    .product-card-body span {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .product-card-body h3 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 0.25rem;
+        color: var(--foreground);
+        letter-spacing: 0.02em;
+    }
+
+    .product-card-body p {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+        line-height: 1.5;
+        opacity: 0.9;
+    }
+
+    /* Pie de la tarjeta: Precio y Botón de añadir */
+    .product-card-footer {
+        display: inside;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+    }
+
+    .product-card-footer strong {
+        font-size: 1.1rem;
+        color: var(--primary);
+        /* Rojo borgoña de tu guía para resaltar el valor */
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+
+    .product-card-footer button {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        padding: 0.5rem 1.25rem;
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 20px;
+        /* Botón fino y estilizado en forma de píldora */
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .product-card-footer button:hover {
+        background-color: var(--primary-hover);
+    }
+
+    /* --- BARRA DE FILTROS --- */
+    .category-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 2rem;
+    }
+
+    .category-bar button {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary);
+        font-weight: 600;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .category-bar button.active {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+    }
+}

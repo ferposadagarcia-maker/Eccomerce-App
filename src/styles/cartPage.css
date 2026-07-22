@@ -1,52 +1,10 @@
 @layer components {
 
-    /* Contenedor principal */
+    /* Contenedor del Carrito */
     .cart-container {
         max-width: 900px;
         margin: 0 auto;
         padding: 3rem 1.5rem;
-    }
-
-    /* Cabecera */
-    .cart-header {
-        margin-bottom: 2.5rem;
-    }
-
-    .cart-header h1 {
-        font-size: 2rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--foreground);
-    }
-
-    .cart-header p {
-        color: var(--muted);
-        font-size: 0.85rem;
-        letter-spacing: 0.02em;
-    }
-
-    /* Estado Vacío de la Bolsa */
-    .cart-empty-state {
-        text-align: center;
-        padding: 5rem 1.5rem;
-    }
-
-    .cart-empty-state h2 {
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--foreground);
-        margin-bottom: 0.75rem;
-    }
-
-    .cart-empty-state p {
-        color: var(--muted);
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-    }
-
-    .cart-empty-state a {
-        display: inline-block;
-        margin-top: 2rem;
     }
 
     /* Tabla del Carrito */
@@ -75,57 +33,13 @@
     .cart-table td {
         padding: 1.25rem 1rem;
         vertical-align: middle;
-        border-bottom: 1px solid var(--border);
     }
 
-    /* Celda de Producto (Imagen + Títulos) */
-    .cart-product-cell {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .cart-product-cell img {
-        width: 60px;
-        height: 60px;
-        border-radius: var(--radius-sm);
-        object-fit: cover;
-    }
-
-    .cart-product-cell h4 {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--foreground);
-        margin: 0;
-    }
-
-    .cart-product-cell span {
-        font-size: 0.75rem;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    /* Celdas de precios */
-    .cart-price-cell {
-        text-align: center;
-        font-size: 0.9rem;
-        color: var(--foreground);
-    }
-
-    .cart-subtotal-cell {
-        text-align: center;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--foreground);
-    }
-
-    /* Controles de Cantidad (+ / -) */
+    /* Controles de cantidad */
     .quantity-control {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        justify-content: center;
     }
 
     .quantity-control button {
@@ -138,6 +52,7 @@
         justify-content: center;
         font-size: 0.9rem;
         border-radius: var(--radius-sm);
+        cursor: pointer;
         transition: background-color 0.2s ease;
     }
 
@@ -152,7 +67,7 @@
         text-align: center;
     }
 
-    /* Botón Eliminar del Carrito */
+    /* Columna de borrar */
     .cart-delete-btn {
         color: var(--destructive);
         font-size: 0.75rem;
@@ -160,58 +75,24 @@
         letter-spacing: 0.05em;
         font-weight: 500;
         cursor: pointer;
-        transition: opacity 0.2s ease;
     }
 
-    .cart-delete-btn:hover {
-        opacity: 0.8;
-    }
-
-    /* Sección de Acciones de la parte inferior */
-    .cart-actions-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    .cart-clear-btn {
-        max-width: 200px;
-        width: 100%;
-    }
-
-    /* Resumen de totales */
+    /* Tarjeta de Resumen / Checkout */
     .cart-summary {
         background-color: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius-sm);
         padding: 2rem;
         max-width: 400px;
-        width: 100%;
+        margin-left: auto;
         text-align: right;
     }
 
     .cart-summary h3 {
         font-size: 1.1rem;
+        color: var(--foreground);
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: var(--foreground);
         margin-bottom: 0.5rem;
-    }
-
-    .cart-summary p {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--secondary);
-        margin-bottom: 1.5rem;
-    }
-
-    .cart-summary a {
-        display: block;
-        width: 100%;
-        text-align: center;
-        text-decoration: none;
     }
 }

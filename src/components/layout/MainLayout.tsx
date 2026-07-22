@@ -2,6 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
+import "../../styles/layout.css";
 
 export const MainLayout = () => {
     const { user, signout } = useAuth();
@@ -16,7 +17,7 @@ export const MainLayout = () => {
             <header className="main-header">
                 <div className="header-container">
                     <Link to="/" className="brand-logo">
-                        AUREA JOYAS
+                        Joyería
                     </Link>
 
                     <nav className="header-nav">
