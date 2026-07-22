@@ -110,17 +110,6 @@ function createDescription(name: string, category: CategoryId): string {
 }
 
 async function seed() {
-
-  console.log("🔍 COMPROBACIÓN DE CREDENCIALES:", {
-    apiKey: firebaseConfig.apiKey ? "Cargada con éxito ✔" : "FALTANTE ❌",
-    projectId: firebaseConfig.projectId ? firebaseConfig.projectId : "FALTANTE ❌",
-  });
-
-  if (!firebaseConfig.projectId) {
-    console.error("❌ ERROR: No se pudieron cargar las variables de entorno. Verifica que tu archivo .env esté en la raíz del proyecto.");
-    process.exit(1);
-  }
-
   const products = Object.entries(CATALOG).flatMap(([categoryId, names]) =>
     names.map((name) => ({
       name,
