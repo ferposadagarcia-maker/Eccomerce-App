@@ -2,8 +2,8 @@ import { createContext, useState, useEffect, useMemo, type ReactNode } from "rea
 import type { Product } from "../../types/product.types";
 
 interface WishlistContextType {
-    wishlistItems: Product[];
-    toggleWishlist: (productId: Product) => void;
+    wishlistItems: any[];
+    toggleWishlist: (productId: any) => void;
     isInWishlist: (productId: string) => boolean;
     wishlistCount: number;
     clearWishlist: () => void
@@ -12,13 +12,13 @@ interface WishlistContextType {
 export const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider = ({ children }: { children: ReactNode }) => {
-    const [wishlistItems, setWishlistItems] = useState<Product[]>(() => {
-        const localData = localStorage.getItem('aurea_wishlist');
+    const [wishlistItems, setWishlistItems] = useState<any[]>(() => {
+        const localData = localStorage.getItem('athenea_wishlist');
         return localData ? JSON.parse(localData) : []
     })
 
     useEffect(() => {
-        localStorage.setItem('aurea_wishlist', JSON.stringify(wishlistItems))
+        localStorage.setItem('athenea_wishlist', JSON.stringify(wishlistItems))
     }, [wishlistItems])
 
     const toggleWishlist = (product: Product) => {
