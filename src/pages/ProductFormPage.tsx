@@ -96,13 +96,11 @@ export const ProductFormPage = () => {
                 imageUrl: s3Url,
                 stock: Number(formState.fields.stock)
             };
-
             if (id) {
                 await updateProduct(id, productPayload);
             } else {
                 await createProduct(productPayload);
             }
-
             await refreshProducts();
             navigate('/admin');
         } catch (error: any) {

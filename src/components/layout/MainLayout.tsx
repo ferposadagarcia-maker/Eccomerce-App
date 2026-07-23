@@ -29,13 +29,14 @@ export const MainLayout = () => {
                             ♡ ({totalFavorites})
                         </Link>
                         {user && user.role === 'admin' && (
-                            <Link to="/admin" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>
+                            <Link to="/admin" style={{ color: 'var(--primary)', fontWeight: 'bold' }}>
                                 Administrar
                             </Link>
                         )}
+
                         {user ? (
                             <div className="user-menu">
-                                <span>{user.email}</span>
+                                <span>{user?.email}</span>
                                 <button onClick={signout} className="logout-btn">
                                     Salir
                                 </button>
@@ -54,7 +55,7 @@ export const MainLayout = () => {
             </div>
 
             <footer className="main-footer">
-                <p>© {new Date().getFullYear()} Aurea Joyas. Todos los derechos reservados.</p>
+                <p>© {new Date().getFullYear()} Athenea Joyas. Todos los derechos reservados.</p>
             </footer>
         </div>
     );

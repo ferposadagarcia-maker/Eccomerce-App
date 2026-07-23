@@ -1,6 +1,5 @@
 @layer components {
 
-    /* Estructura general de la aplicación */
     .app-shell {
         display: flex;
         flex-direction: column;
@@ -45,5 +44,20 @@
         font-size: 0.8rem;
         color: var(--muted);
         letter-spacing: 0.05em;
+    }
+}
+
+.user-menu {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
     }
 }
