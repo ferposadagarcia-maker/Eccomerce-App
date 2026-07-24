@@ -3,7 +3,7 @@
 Este proyecto es una **Single Page Application (SPA) Full Stack** de comercio electrónico especializada en joyería fina y de alta gama ("Athenea Joyería"), desarrollada como Proyecto Integrador para la especialización Frontend de Henry. La aplicación implementa arquitectura por capas, tipado estricto con TypeScript, persistencia en la nube en tiempo real, carga segura de archivos en la nube y una completa suite de pruebas automatizadas.
 
 ---
-🌐 **Link de la App:** [eccomerce-app-xi.vercel.app](https://eccomerce-app-xi.vercel.app/)
+🌐 **Link de la App:** https://ecommerce-app-sage-sigma.vercel.app/
 
 ## 📸 Capturas de Pantalla de la App
 
