@@ -13,7 +13,6 @@ interface CartContextType {
 
 }
 
-//* Context
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const initialState: CartState = {
@@ -26,7 +25,6 @@ const initCart = (): CartState => {
     return localData ? JSON.parse(localData) : initialState
 };
 
-//* Provider
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(cartReducer, initialState, initCart);
 

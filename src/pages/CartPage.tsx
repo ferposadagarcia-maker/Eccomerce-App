@@ -2,16 +2,15 @@ import { useCart } from '../hooks/useCart';
 import { Link } from 'react-router-dom';
 import '../styles/cartPage.css';
 
-
 export const CartPage = () => {
     const { items, totalItems, updateQuantity, removeFromCart, clearCart } = useCart();
 
     if (items.length === 0) {
         return (
             <main className="cart-empty-state">
-                <h2>Tu carrito está vacío</h2>
+                <h2>Tu bolsa está vacía</h2>
                 <p>
-                    Parece que aún no has seleccionado productos.
+                    Parece que aún no has seleccionado piezas de joyería para tu colección.
                 </p>
                 <Link to="/" className="btn-jewelry-primary">
                     Explorar Catálogo
@@ -23,8 +22,8 @@ export const CartPage = () => {
     return (
         <main className="cart-container">
             <header className="cart-header">
-                <h1>Tu carrito</h1>
-                <p>Revisa y confirma los productos añadidos a tu orden</p>
+                <h1>Tu bolsa</h1>
+                <p>Revisa y confirma las joyas exclusivas añadidas a tu orden</p>
             </header>
 
             <section className="cart-table-wrapper">
@@ -44,7 +43,7 @@ export const CartPage = () => {
                                 <td>
                                     <div className="cart-product-cell">
                                         <img
-                                            src={item.product.imageUrl || 'https://via.placeholder.com/100'}
+                                            src={item.product.imageUrl || 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400'}
                                             alt={item.product.name}
                                         />
                                         <div>
@@ -57,7 +56,6 @@ export const CartPage = () => {
                                 <td className="cart-price-cell">
                                     ${item.product.price.toLocaleString()}
                                 </td>
-
                                 <td>
                                     <div className="quantity-control">
                                         <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)}>
@@ -69,11 +67,9 @@ export const CartPage = () => {
                                         </button>
                                     </div>
                                 </td>
-
                                 <td className="cart-subtotal-cell">
                                     ${(item.product.price * item.quantity).toLocaleString()}
                                 </td>
-
                                 <td style={{ textAlign: 'center' }}>
                                     <button
                                         onClick={() => removeFromCart(item.product.id)}
@@ -93,7 +89,7 @@ export const CartPage = () => {
                     onClick={clearCart}
                     className="btn-jewelry-secondary cart-clear-btn"
                 >
-                    Vaciar carrito
+                    Vaciar bolsa
                 </button>
 
                 <div className="cart-summary">

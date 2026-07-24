@@ -1,6 +1,5 @@
 @layer components {
 
-    /* Contenedor del Estado Vacío (Empty State) */
     .wishlist-empty-state {
         text-align: center;
         padding: 5rem 1.5rem;
@@ -25,13 +24,11 @@
         display: inline-block;
     }
 
-    /* Cabecera elegante de favoritos */
     .wishlist-header {
         margin-bottom: 2.5rem;
         text-align: center;
     }
 
-    /* Adaptación responsiva para alinearse a la izquierda en pantallas grandes */
     @media (min-width: 768px) {
         .wishlist-header {
             text-align: left;

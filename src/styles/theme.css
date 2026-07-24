@@ -9,7 +9,6 @@
 
     /* Mapeo Semántico */
     --background: var(--color-floral-light);
-    /* Fondo cálido pastel */
     --surface: #faf6f0;
     /* Secciones alternas */
     --card: var(--color-white);
@@ -17,9 +16,7 @@
 
     /* Textos */
     --foreground: var(--color-gray-brown);
-    /* Texto marrón grisáceo suave */
     --muted: #82726d;
-    /* Subtextos o detalles secundarios */
 
     /* Acentuaciones de Marca (Rojo Borgoña de tu guía) */
     --primary: var(--color-dark-red);
@@ -44,7 +41,6 @@
     --radius-sm: 2px;
     --radius-md: 4px;
     --radius-lg: 12px;
-    /* Mayor suavidad para arcos orgánicos */
 
     /* Sombras Discretas de Lujo (Casi imperceptibles) */
     --shadow-sm: 0 1px 3px 0 rgba(87, 73, 68, 0.03);

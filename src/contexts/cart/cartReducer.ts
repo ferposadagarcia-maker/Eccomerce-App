@@ -35,7 +35,6 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
         }
 
         case 'REMOVE_ITEM': {
-            // CORRECCIÓN: Al ser un string plano, se asigna directo sin llaves {}
             const productId = action.payload;
 
             const newItems = state.items.filter((item) => item.product.id !== productId);
@@ -53,7 +52,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
                 const newItems = state.items.filter((item) => item.product.id !== productId);
                 return {
                     items: newItems,
-                    totalItems: calculateTotal(newItems), // <--- Correcto: totalItems
+                    totalItems: calculateTotal(newItems),
                 };
             }
 
@@ -70,7 +69,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
         case 'CLEAR_CART': {
             return {
                 items: [],
-                totalItems: 0, // <--- Correcto: totalItems
+                totalItems: 0,
             };
         }
 
