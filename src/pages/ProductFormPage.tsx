@@ -3,32 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { createProduct, updateProduct } from '../services/products.service';
 import { uploadImage } from '../services/upload.service';
-
-
-type Category = 'anillos' | 'collares' | 'pulseras';
-
-interface ProductFormFields {
-    name: string;
-    price: number;
-    description: string;
-    category: Category | '';
-    stock: number;
-    imageUrl: string;
-}
-
-interface ProductFormErrors {
-    name?: string;
-    price?: string;
-    category?: string;
-    stock?: string;
-}
-
-interface ProductFormState {
-    fields: ProductFormFields;
-    errors: ProductFormErrors;
-    status: 'editing' | 'submitting' | 'success' | 'error';
-    globalError: string | null;
-}
+import type { Category, ProductFormFields, ProductFormState } from '../types/productForm.types';
+import '../styles/adminPage.css';
 
 export const ProductFormPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -116,8 +92,8 @@ export const ProductFormPage = () => {
     const isSubmitting = formState.status === 'submitting';
 
     return (
-        <div style={{ maxWidth: '400px' }}>
-            <h2 style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1.25rem', marginBottom: '1.5rem' }}>
+        <div className="admin-form-container">
+            <h2 className="admin-form-title">
                 {id ? 'Editar Joya Exclusiva' : 'Añadir Nueva Joya'}
             </h2>
 
@@ -145,15 +121,7 @@ export const ProductFormPage = () => {
                         value={formState.fields.category}
                         onChange={(e) => handleInputChange('category', e.target.value)}
                         disabled={isSubmitting}
-                        style={{
-                            border: 'none',
-                            borderBottom: '1px solid var(--border)',
-                            padding: '0.5rem 0',
-                            backgroundColor: 'transparent',
-                            color: 'var(--foreground)',
-                            outline: 'none',
-                            width: '100%'
-                        }}
+                        className="admin-select-field"
                     >
                         <option value="" disabled>Seleccione una colección...</option>
                         <option value="anillos">Anillos</option>
@@ -199,18 +167,23 @@ export const ProductFormPage = () => {
                     />
                 </div>
 
-                <div className="auth-field" style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
-                    <label htmlFor="prod-file">Fotografía de la Joya</label>
+                <div className="admin-file-field">
+                    <label>Fotografía de la Joya</label>
+
+                    <label htmlFor="prod-file" className="admin-file-upload-label">
+                        {selectedFile ? `✓ ${selectedFile.name.slice(0, 15)}...` : 'Seleccionar Imagen'}
+                    </label>
+
                     <input
                         id="prod-file"
                         type="file"
                         accept="image/*"
                         onChange={(e) => setSelectedFile(e.target.files ? e.target.files[0] : null)}
                         disabled={isSubmitting}
-                        style={{ border: 'none', padding: '0.5rem 0', cursor: 'pointer' }}
+                        style={{ display: 'none' }}
                     />
                     {id && formState.fields.imageUrl && !selectedFile && (
-                        <span style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.25rem' }}>
+                        <span className="admin-file-help">
                             Dejar vacío para conservar la imagen actual.
                         </span>
                     )}

@@ -9,11 +9,20 @@ export const CatalogPage = () => {
     const { filteredProducts, isLoading, error, filters, setCategory, setSearchQuery } = useProducts();
     const [searchTerm, setSearchTerm] = useState<string>(filters.searchQuery);
 
+    const [visibleCount, setVisibleCount] = useState<number>(20);
     const debouncedSearchTerm = useDebounce(searchTerm, 400);
 
     useEffect(() => {
         setSearchQuery(debouncedSearchTerm);
+        setVisibleCount(20);
     }, [debouncedSearchTerm]);
+
+    const handleCategoryChange = (catId: string) => {
+        setCategory(catId);
+        setVisibleCount(20);
+    };
+
+    const displayedProducts = filteredProducts.slice(0, visibleCount);
 
     return (
         <main className="catalog-container">
@@ -38,13 +47,11 @@ export const CatalogPage = () => {
                 </div>
             </header>
 
-            {/* Barra de Categorías */}
             <FilterBar
                 selectedCategory={filters.category}
-                onSelectCategory={setCategory}
+                onSelectCategory={handleCategoryChange}
             />
 
-            {/* Controladores de Estados de Carga o Errores */}
             {isLoading && (
                 <div style={{ textAlign: 'center', padding: '3rem' }}>
                     <p>Cargando piezas exclusivas...</p>
@@ -64,8 +71,18 @@ export const CatalogPage = () => {
             )}
 
             {!isLoading && !error && filteredProducts.length > 0 && (
-                <ProductGrid products={filteredProducts} />
+                <ProductGrid products={displayedProducts} />
             )}
+            {filteredProducts.length > visibleCount && (
+                <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                    <button
+                        onClick={() => setVisibleCount((prev) => prev + 20)}
+                        className="btn-jewelry-secondary">
+                        Cargar más joyas...
+                    </button>
+                </div>
+            )}
+
         </main>
     );
 };

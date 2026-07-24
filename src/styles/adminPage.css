@@ -1,6 +1,5 @@
 @layer components {
 
-    /* Estructura del Layout del Administrador */
     .admin-layout-container {
         display: flex;
         min-height: calc(100vh - 160px);
@@ -47,7 +46,6 @@
         padding: 3rem 2.5rem;
     }
 
-    /* Tabla de Inventario Responsiva */
     .admin-table-wrapper {
         overflow-x: auto;
         border: 1px solid var(--border);
@@ -81,7 +79,6 @@
         color: var(--foreground);
     }
 
-    /* Acciones de la fila */
     .admin-actions-cell {
         display: flex;
         gap: 1rem;
@@ -103,9 +100,6 @@
     }
 }
 
-/* src/styles/adminPage.css (Agregar al final) */
-
-/* Títulos y Subtítulos de las vistas */
 .admin-view-title {
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -119,7 +113,6 @@
     margin-top: 0.25rem;
 }
 
-/* Estado vacío en administración */
 .admin-empty-state {
     padding: 3rem;
     text-align: center;
@@ -129,7 +122,6 @@
     color: var(--muted);
 }
 
-/* Imagen miniatura de la joya en la fila */
 .admin-row-thumb {
     width: 48px;
     height: 48px;
@@ -151,4 +143,68 @@
 .admin-row-stock {
     text-align: center;
     color: var(--muted);
+}
+
+.admin-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.admin-form-title {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+}
+
+.admin-select-field {
+    border: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 0.5rem 0 !important;
+    background-color: transparent !important;
+    color: var(--foreground) !important;
+    outline: none !important;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.admin-file-field {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.admin-file-upload-label {
+    display: inline-block;
+    border: 1px solid var(--border);
+    background-color: var(--surface);
+    color: var(--foreground);
+    padding: 0.60rem 1.20rem;
+    font-size: 0.55rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    width: 40%;
+    margin-top: 0.5rem;
+}
+
+.admin-file-upload-label:hover {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
+}
+
+.admin-file-help {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    display: block;
 }
